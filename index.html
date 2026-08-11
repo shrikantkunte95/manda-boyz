@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manda Boyz | Nostalgic Playlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Courier+Prime&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2f3542;
+            --glass: rgba(255, 255, 255, 0.1);
+            --neon-blue: #00d2ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: url('https://cur.cursors-4u.net/others/oth-9/oth824.cur'), auto;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Space Mono', monospace;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Cinematic Background */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1516280440614-37939bbdd4f1?auto=format&fit=crop&q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(30%) contrast(110%);
+            z-index: -2;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%,
+                rgba(0, 0, 0, 0.1) 50%
+            );
+            background-size: 100% 4px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: center; */
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Aesthetic Elements */
+        .retro-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            padding: 5px 15px;
+            font-size: 12px;
+            transform: rotate(2deg);
+            box-shadow: 5px 5px 0px black;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        h1 {
+            font-family: 'Bungee Shade', cursive;
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 4px 4px var(--primary);
+            animation: flicker 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+            20%, 22%, 24%, 55% { opacity: 0.8; }
+        }
+
+        /* Central Visual: The Digital Cassette */
+        .cassette-container {
+            position: relative;
+            width: 350px;
+            height: 220px;
+            background: #333;
+            border-radius: 10px;
+            border: 4px solid #111;
+            padding: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin: 40px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .cassette-container:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .label {
+            width: 100%;
+            height: 120px;
+            background: #eee;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+        }
+
+        .label::after {
+            content: "MANDA BOYZ '04 MIX";
+            font-family: 'Courier Prime';
+            font-weight: bold;
+            font-size: 18px;
+            border-bottom: 2px solid #333;
+        }
+
+        .reels {
+            display: flex;
+            justify-content: space-around;
+            width: 60%;
+            margin-top: 15px;
+        }
+
+        .reel {
+            width: 40px;
+            height: 40px;
+            border: 6px dashed #333;
+            border-radius: 50%;
+            animation: spin 3s linear infinite paused;
+        }
+
+        .playing .reel {
+            animation-play-state: running;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Quotes Section */
+        .quotes-container {
+            height: 60px;
+            font-style: italic;
+            color: #ddd;
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Glassmorphism Player */
+        .player {
+            /* position: fixed;
+            bottom: 30px; */
+            width: 90%;
+            max-width: 500px;
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .player-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .track-name {
+            font-weight: bold;
+            color: var(--neon-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 85%;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .btn-play {
+            font-size: 40px;
+        }
+
+        /*
+         * YouTube iframe:
+         * Do not use display:none or a negative position.
+         * A real, tiny iframe works more reliably with the YouTube API.
+         */
+        #yt-player {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0.01;
+            pointer-events: none;
+            border: 0;
+        }
+
+        /* Shown only if user opens this as file:// */
+        #youtube-warning {
+            display: none;
+            position: fixed;
+            left: 50%;
+            bottom: 185px;
+            transform: translateX(-50%);
+            width: min(520px, 90%);
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.88);
+            border: 1px solid rgba(255,71,87,0.55);
+            color: #ddd;
+            font-size: 11px;
+            line-height: 1.5;
+            text-align: center;
+            z-index: 500;
+        }
+
+        #youtube-warning strong {
+            color: var(--primary);
+        }
+
+        /* Keyboard interaction visual */
+        .buzz-anim {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            animation: float-up 1s ease-out forwards;
+            z-index: 1000;
+        }
+
+        @keyframes float-up {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .mobile-warning {
+            display: none;
+            font-size: 10px;
+            margin-top: 10px;
+            color: #888;
+        }
+
+        @media (max-width: 600px) {
+            .mobile-warning { display: block; }
+            .cassette-container { width: 280px; height: 180px; }
+            h1 { font-size: 3rem; }
+
+            #youtube-warning {
+                bottom: 175px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- <div class="status-bar">
+        Yahoo! Messenger: <span id="status-text">Online (Senti Mode...)</span>
+    </div> -->
+<!-- 
+    <div class="retro-label">
+        BURNED ON: 15 AUG 2004
+    </div> -->
+
+    <div class="container" id="main-click-area">
+        <h1>MANDA BOYZ</h1>
+
+        <div class="cassette-container" id="cassette">
+            <div class="label">
+                <div class="reels">
+                    <div class="reel"></div>
+                    <div class="reel"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="quotes-container">
+            <p id="quote">"Yaaron dosti badi hi haseen hai..."</p>
+        </div> -->
+
+        <p class="mobile-warning">Tap anywhere to 'BUZZ' your friends</p>
+        <div class="player">
+        <div class="player-info">
+            <div class="track-name" id="track-title">Press Play to start memories...</div>
+            <div id="time">00:00</div>
+        </div>
+
+        <div class="progress-container" id="progress-container">
+            <div class="progress-bar" id="progress"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" id="prev-btn" type="button">⏮</button>
+            <button class="btn btn-play" id="play-btn" type="button">▶</button>
+            <button class="btn" id="next-btn" type="button">⏭</button>
+        </div>
+    </div>
+    </div>
+
+    <!-- Glassmorphism Player -->
+    
+
+    <!-- YouTube API integration -->
+    <div id="yt-player"></div>
+
+    <div id="youtube-warning">
+        <strong>YouTube cannot play directly from file://</strong><br>
+        Run this folder with <b>npx serve .</b> and open the localhost URL.
+    </div>
+
+    <script>
+        /* =========================================================
+           QUOTES
+        ========================================================= */
+
+        const quotes = [
+            '"Pal, ye hai pyaar ke pal..."',
+            '"Awarapan, banjarapan... ek khala hai seene mein."',
+            '"Tu hi meri shab hai, subah hai..."',
+            '"Dil kyun yeh mera shor kare?"',
+            '"Beete lamhe... woh baatein, woh yaadein."',
+            '"Zindagi do pal ki... sirf do pal ki."',
+            '"Hero lag raha hai bhai tera!"',
+            '"Cyber Cafe @ 20/hr is where we lived."'
+        ];
+
+        let quoteIndex = 0;
+
+        setInterval(() => {
+            quoteIndex = (quoteIndex + 1) % quotes.length;
+
+            const quoteEl = document.getElementById('quote');
+
+            quoteEl.style.opacity = 0;
+
+            setTimeout(() => {
+                quoteEl.innerText = quotes[quoteIndex];
+                quoteEl.style.opacity = 1;
+            }, 500);
+
+        }, 4000);
+
+
+        /* =========================================================
+           YOUTUBE CONFIG
+           ========================================================= */
+
+        /*
+         * This is the playlist from the YouTube URL you provided.
+         *
+         * Playlist:
+         * PLq-SlEHV0-RRP0tUOAduTfqTYKJwvF-0N
+         *
+         * First video:
+         * IgITZfS7L_8
+         */
+        const YOUTUBE_PLAYLIST_ID =
+            'PLq-SlEHV0-RRP0tUOAduTfqTYKJwvF-0N';
+
+        const FIRST_VIDEO_ID =
+            'IgITZfS7L_8';
+
+
+        /* =========================================================
+           YOUTUBE IFRAME API
+        ========================================================= */
+
+        let player = null;
+        let playerReady = false;
+        let progressInterval = null;
+
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+
+        const firstScriptTag =
+            document.getElementsByTagName('script')[0];
+
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+        /*
+         * YouTube calls this automatically after the API loads.
+         */
+        function onYouTubeIframeAPIReady() {
+
+            console.log('YouTube API loaded');
+
+            /*
+             * IMPORTANT:
+             *
+             * listType and list MUST be inside playerVars.
+             * In the original code they were outside playerVars,
+             * so YouTube was not being initialized as a playlist.
+             */
+            const playerVars = {
+                autoplay: 0,
+                controls: 0,
+                disablekb: 1,
+                rel: 0,
+                playsinline: 1,
+                modestbranding: 1,
+
+                listType: 'playlist',
+                list: YOUTUBE_PLAYLIST_ID
+            };
+
+            /*
+             * Error 153 happens when YouTube doesn't receive a
+             * proper HTTP/HTTPS origin/referrer.
+             *
+             * When running with:
+             *     npx serve .
+             *
+             * this becomes http://localhost:3000 (or similar).
+             *
+             * Do NOT send origin:null for file:// pages.
+             */
+            if (
+                window.location.protocol === 'http:' ||
+                window.location.protocol === 'https:'
+            ) {
+                playerVars.origin = window.location.origin;
+            }
+
+            player = new YT.Player('yt-player', {
+                height: '1',
+                width: '1',
+
+                playerVars: playerVars,
+
+                events: {
+                    onReady: onPlayerReady,
+                    onStateChange: onPlayerStateChange,
+                    onError: onPlayerError
+                }
+            });
+        }
+
+
+        /* =========================================================
+           PLAYER READY
+        ========================================================= */
+
+        function onPlayerReady(event) {
+
+            playerReady = true;
+
+            console.log('YouTube player ready');
+
+            trackTitle.innerText =
+                'Playlist Loaded. Click Play.';
+
+            /*
+             * Explicitly load the playlist after the player is ready.
+             * This makes playlist navigation reliable.
+             */
+            try {
+                player.loadPlaylist({
+                    list: YOUTUBE_PLAYLIST_ID,
+                    listType: 'playlist',
+                    index: 0
+                });
+            } catch (error) {
+                console.error('Playlist load error:', error);
+            }
+        }
+
+
+        /* =========================================================
+           PLAYER STATE
+        ========================================================= */
+
+        function onPlayerStateChange(event) {
+
+            if (!playerReady) {
+                return;
+            }
+
+            switch (event.data) {
+
+                case YT.PlayerState.PLAYING:
+
+                    playBtn.innerText = '⏸';
+
+                    cassette.classList.add('playing');
+
+                    updateTrackTitle();
+
+                    startProgressTimer();
+
+                    break;
+
+
+                case YT.PlayerState.PAUSED:
+
+                    playBtn.innerText = '▶';
+
+                    cassette.classList.remove('playing');
+
+                    stopProgressTimer();
+
+                    break;
+
+
+                case YT.PlayerState.ENDED:
+
+                    playBtn.innerText = '▶';
+
+                    cassette.classList.remove('playing');
+
+                    stopProgressTimer();
+
+                    /*
+                     * Normally YouTube advances automatically through
+                     * a loaded playlist. Refresh the title afterward.
+                     */
+                    setTimeout(updateTrackTitle, 700);
+
+                    break;
+
+
+                case YT.PlayerState.BUFFERING:
+
+                    trackTitle.innerText = 'Loading memory...';
+
+                    break;
+
+
+                case YT.PlayerState.CUED:
+
+                    updateTrackTitle();
+
+                    break;
+            }
+        }
+
+
+        /* =========================================================
+           PLAYER ERROR
+        ========================================================= */
+
+        function onPlayerError(event) {
+
+            console.error('YouTube Player Error:', event.data);
+
+            /*
+             * 153 = missing HTTP Referer / client identification.
+             * This is normally caused by opening the page as file://.
+             */
+            if (event.data === 153) {
+
+                trackTitle.innerText =
+                    'Use localhost to play YouTube';
+
+                document.getElementById(
+                    'youtube-warning'
+                ).style.display = 'block';
+
+                return;
+            }
+
+            /*
+             * 101 / 150 = video owner does not allow embedding.
+             */
+            if (event.data === 101 || event.data === 150) {
+
+                trackTitle.innerText =
+                    'This video cannot be embedded';
+
+                return;
+            }
+
+            trackTitle.innerText =
+                'Unable to play this song';
+        }
+
+
+        /* =========================================================
+           DOM REFERENCES
+        ========================================================= */
+
+        const playBtn =
+            document.getElementById('play-btn');
+
+        const trackTitle =
+            document.getElementById('track-title');
+
+        const progressBar =
+            document.getElementById('progress');
+
+        const cassette =
+            document.getElementById('cassette');
+
+
+        /* =========================================================
+           PLAY / PAUSE
+        ========================================================= */
+
+        playBtn.addEventListener('click', () => {
+
+            if (!playerReady || !player) {
+
+                trackTitle.innerText =
+                    'Loading YouTube...';
+
+                return;
+            }
+
+            const state =
+                player.getPlayerState();
+
+            if (state === YT.PlayerState.PLAYING) {
+
+                player.pauseVideo();
+
+            } else {
+
+                player.playVideo();
+            }
+
+            createBuzz(
+                window.innerWidth / 2,
+                window.innerHeight - 150,
+                'PLAY/PAUSE'
+            );
+        });
+
+
+        /* =========================================================
+           NEXT
+        ========================================================= */
+
+        document
+            .getElementById('next-btn')
+            .addEventListener('click', () => {
+
+                if (!playerReady || !player) {
+                    return;
+                }
+
+                player.nextVideo();
+
+                setTimeout(updateTrackTitle, 700);
+
+                createBuzz(
+                    window.innerWidth / 2,
+                    window.innerHeight - 150,
+                    'NEXT >>'
+                );
+            });
+
+
+        /* =========================================================
+           PREVIOUS
+        ========================================================= */
+
+        document
+            .getElementById('prev-btn')
+            .addEventListener('click', () => {
+
+                if (!playerReady || !player) {
+                    return;
+                }
+
+                player.previousVideo();
+
+                setTimeout(updateTrackTitle, 700);
+
+                createBuzz(
+                    window.innerWidth / 2,
+                    window.innerHeight - 150,
+                    '<< PREV'
+                );
+            });
+
+
+        /* =========================================================
+           TRACK TITLE
+        ========================================================= */
+
+        function updateTrackTitle() {
+
+            if (!playerReady || !player) {
+                return;
+            }
+
+            try {
+
+                const data =
+                    player.getVideoData();
+
+                if (data && data.title) {
+
+                    trackTitle.innerText =
+                        data.title;
+                }
+
+            } catch (error) {
+
+                console.warn(
+                    'Could not get track title:',
+                    error
+                );
+            }
+        }
+
+
+        /* =========================================================
+           PROGRESS
+        ========================================================= */
+
+        function startProgressTimer() {
+
+            stopProgressTimer();
+
+            progressInterval =
+                setInterval(() => {
+
+                    if (!playerReady || !player) {
+                        return;
+                    }
+
+                    const currentTime =
+                        player.getCurrentTime();
+
+                    const duration =
+                        player.getDuration();
+
+                    if (!duration || duration <= 0) {
+                        return;
+                    }
+
+                    const pct =
+                        (currentTime / duration) * 100;
+
+                    progressBar.style.width =
+                        Math.min(100, pct) + '%';
+
+                    const mins =
+                        Math.floor(currentTime / 60);
+
+                    const secs =
+                        Math.floor(currentTime % 60);
+
+                    document.getElementById('time')
+                        .innerText =
+                        `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+
+                }, 500);
+        }
+
+
+        function stopProgressTimer() {
+
+            if (progressInterval) {
+
+                clearInterval(progressInterval);
+
+                progressInterval = null;
+            }
+        }
+
+
+        /* =========================================================
+           PROGRESS SEEK
+        ========================================================= */
+
+        document
+            .getElementById('progress-container')
+            .addEventListener('click', (event) => {
+
+                if (!playerReady || !player) {
+                    return;
+                }
+
+                const rect =
+                    event.currentTarget.getBoundingClientRect();
+
+                const percentage =
+                    (event.clientX - rect.left) /
+                    rect.width;
+
+                const duration =
+                    player.getDuration();
+
+                if (!duration || duration <= 0) {
+                    return;
+                }
+
+                const safePercentage =
+                    Math.max(0, Math.min(1, percentage));
+
+                player.seekTo(
+                    duration * safePercentage,
+                    true
+                );
+            });
+
+
+        /* =========================================================
+           BUZZ INTERACTION
+        ========================================================= */
+
+        function createBuzz(
+            x,
+            y,
+            text = 'BUZZ!'
+        ) {
+
+            const buzz =
+                document.createElement('div');
+
+            buzz.className = 'buzz-anim';
+
+            buzz.style.left =
+                x + 'px';
+
+            buzz.style.top =
+                y + 'px';
+
+            buzz.innerText =
+                text;
+
+            document.body.appendChild(buzz);
+
+            /*
+             * Short retro beep.
+             *
+             * Reuse the browser's audio context when possible,
+             * instead of creating one for every click.
+             */
+            try {
+
+                const AudioContext =
+                    window.AudioContext ||
+                    window.webkitAudioContext;
+
+                if (AudioContext) {
+
+                    const actx =
+                        new AudioContext();
+
+                    const osc =
+                        actx.createOscillator();
+
+                    const gain =
+                        actx.createGain();
+
+                    osc.type = 'sine';
+
+                    osc.frequency.setValueAtTime(
+                        800,
+                        actx.currentTime
+                    );
+
+                    gain.gain.setValueAtTime(
+                        0.08,
+                        actx.currentTime
+                    );
+
+                    gain.gain.exponentialRampToValueAtTime(
+                        0.00001,
+                        actx.currentTime + 0.1
+                    );
+
+                    osc.connect(gain);
+
+                    gain.connect(
+                        actx.destination
+                    );
+
+                    osc.start();
+
+                    osc.stop(
+                        actx.currentTime + 0.1
+                    );
+                }
+
+            } catch (error) {
+                console.log(
+                    'Buzz audio unavailable.'
+                );
+            }
+
+            setTimeout(() => {
+                buzz.remove();
+            }, 1000);
+        }
+
+
+        /* =========================================================
+           PAGE CLICK
+        ========================================================= */
+
+        window.addEventListener('click', (e) => {
+
+            /*
+             * Don't create a normal BUZZ when clicking
+             * the music player buttons or progress bar.
+             */
+            if (
+                e.target.closest('button') ||
+                e.target.closest('.progress-container')
+            ) {
+                return;
+            }
+
+            createBuzz(
+                e.clientX,
+                e.clientY
+            );
+        });
+
+
+        /* =========================================================
+           KEYBOARD
+        ========================================================= */
+
+        window.addEventListener('keydown', (e) => {
+
+            if (e.code !== 'Space') {
+                return;
+            }
+
+            e.preventDefault();
+
+            if (!playerReady || !player) {
+                return;
+            }
+
+            const state =
+                player.getPlayerState();
+
+            if (
+                state === YT.PlayerState.PLAYING
+            ) {
+
+                player.pauseVideo();
+
+            } else {
+
+                player.playVideo();
+            }
+
+            createBuzz(
+                window.innerWidth / 2,
+                window.innerHeight / 2,
+                'SENTI OVERLOAD!'
+            );
+        });
+
+
+        /* =========================================================
+           FILE:// WARNING
+        ========================================================= */
+
+        /*
+         * This is the one limitation that cannot be fixed purely
+         * inside the HTML:
+         *
+         * YouTube Error 153 can occur when a page is opened directly
+         * as file:// because there is no normal HTTP Referer.
+         *
+         * Use:
+         *
+         *     npx serve .
+         *
+         * and open the localhost URL.
+         */
+        if (window.location.protocol === 'file:') {
+
+            document.getElementById(
+                'youtube-warning'
+            ).style.display = 'block';
+
+            document.getElementById(
+                'status-text'
+            ).innerText =
+                'Local file — use localhost for music';
+
+        }
+    </script>
+
+</body>
+</html>
