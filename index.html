@@ -1,241 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manda Boyz | Nostalgic Playlist</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Courier+Prime&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>Manda Boyz | Trending 2000s</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Courier+Prime&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <style>
+        /* =========================================================
+           EDIT THE WEBSITE'S APPEARANCE HERE
+        ========================================================= */
+
         :root {
-            --primary: #ff4757;
-            --secondary: #2f3542;
-            --glass: rgba(255, 255, 255, 0.1);
-            --neon-blue: #00d2ff;
+            --red: #ff4757;
+            --blue: #00d2ff;
+            --glass: rgba(255, 255, 255, 0.09);
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            cursor: url('https://cur.cursors-4u.net/others/oth-9/oth824.cur'), auto;
         }
 
         body {
-            background: #0a0a0a;
+            background: #080808;
             color: #fff;
             font-family: 'Space Mono', monospace;
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Cinematic Background */
-        .bg-overlay {
+        .bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            z-index: -3;
             background:
-                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('https://images.unsplash.com/photo-1516280440614-37939bbdd4f1?auto=format&fit=crop&q=80&w=2070');
+                linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.88)),
+                url("https://images.unsplash.com/photo-1516280440614-37939bbdd4f1?auto=format&fit=crop&q=80&w=2070");
             background-size: cover;
             background-position: center;
-            filter: grayscale(30%) contrast(110%);
-            z-index: -2;
+            filter: grayscale(25%) contrast(115%);
         }
 
         .scanlines {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                rgba(18, 16, 16, 0) 50%,
-                rgba(0, 0, 0, 0.1) 50%
-            );
-            background-size: 100% 4px;
-            z-index: -1;
+            inset: 0;
+            z-index: -2;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.18;
+            background: linear-gradient(rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
         }
 
-        /* Layout */
-        .container {
+        header {
             max-width: 1200px;
-            width: 100%;
-            height: 100%;
+            margin: auto;
+            padding: 28px 25px 10px;
             display: flex;
-            flex-direction: column;
-            /* justify-content: center; */
-            align-items: center;
-            padding: 20px;
-            text-align: center;
+            justify-content: space-between;
         }
 
-        /* Aesthetic Elements */
-        .retro-label {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary);
-            padding: 5px 15px;
+        .status {
+            color: var(--blue);
             font-size: 12px;
-            transform: rotate(2deg);
-            box-shadow: 5px 5px 0px black;
-            font-family: 'Courier Prime', monospace;
+            text-shadow: 0 0 8px var(--blue);
         }
 
-        .status-bar {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 14px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
+        .badge {
+            background: var(--red);
+            padding: 6px 13px;
+            font: 12px 'Courier Prime';
+            transform: rotate(2deg);
+            box-shadow: 5px 5px #000;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 25px 150px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 20px 0 35px;
         }
 
         h1 {
-            font-family: 'Bungee Shade', cursive;
+            font-family: 'Bungee Shade';
             font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 10px;
-            color: #fff;
-            text-shadow: 4px 4px var(--primary);
+            line-height: 1;
+            text-shadow: 5px 5px var(--red);
             animation: flicker 2s infinite;
         }
 
         @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
-            20%, 22%, 24%, 55% { opacity: 0.8; }
+
+            0%,
+            19%,
+            21%,
+            23%,
+            25%,
+            54%,
+            56%,
+            100% {
+                opacity: 1;
+            }
+
+            20%,
+            22%,
+            24%,
+            55% {
+                opacity: 0.8;
+            }
         }
 
-        /* Central Visual: The Digital Cassette */
-        .cassette-container {
-            position: relative;
-            width: 350px;
-            height: 220px;
-            background: #333;
-            border-radius: 10px;
-            border: 4px solid #111;
+        .subtitle {
+            margin-top: 15px;
+            color: #bbb;
+            font-size: 13px;
+        }
+
+        .section {
+            margin: 28px 0;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: var(--blue);
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
+        }
+
+        .section-label {
+            font-size: 10px;
+            color: #777;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+
+        .card {
+            background: rgba(10, 10, 10, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.13);
+            border-radius: 14px;
             padding: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            margin: 40px 0;
-            transition: transform 0.3s ease;
+            backdrop-filter: blur(10px);
+            transition: 0.25s;
+            cursor: pointer;
         }
 
-        .cassette-container:hover {
-            transform: scale(1.05) rotate(-2deg);
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: var(--red);
+            box-shadow: 0 12px 30px #000;
         }
 
-        .label {
+        .cover {
+            aspect-ratio: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            background: #222;
+        }
+
+        .cover img {
             width: 100%;
-            height: 120px;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .cover .play {
+            position: absolute;
+            right: 9px;
+            bottom: 9px;
+            width: 38px;
+            height: 38px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--red);
+            color: #fff;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .card:hover .play {
+            opacity: 1;
+        }
+
+        .song {
+            margin-top: 9px;
+            font-size: 12px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .artist {
+            margin-top: 4px;
+            color: #888;
+            font-size: 10px;
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            background: var(--glass);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 18px;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+        }
+
+        .cassette {
+            min-height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cassette-box {
+            height: 80%;
+            width: 90%;
+            background: #333;
+            border: 4px solid #111;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 20px 45px #000;
+        }
+
+        .cassette-label {
+            height: 100%;
             background: #eee;
             border-radius: 5px;
-            position: relative;
-            overflow: hidden;
+            color: #222;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color: #222;
         }
 
-        .label::after {
-            content: "MANDA BOYZ '04 MIX";
-            font-family: 'Courier Prime';
-            font-weight: bold;
-            font-size: 18px;
+        .cassette-label strong {
+            font: 18px 'Courier Prime';
             border-bottom: 2px solid #333;
         }
 
         .reels {
             display: flex;
-            justify-content: space-around;
-            width: 60%;
-            margin-top: 15px;
+            gap: 100px;
+            margin-bottom: 12px;
         }
 
         .reel {
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border: 6px dashed #333;
             border-radius: 50%;
             animation: spin 3s linear infinite paused;
         }
 
-        .playing .reel {
+        .cassette-box.playing .reel {
             animation-play-state: running;
         }
 
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
-        /* Quotes Section */
-        .quotes-container {
-            height: 60px;
+        .quote {
+            text-align: center;
+            color: #ccc;
             font-style: italic;
-            color: #ddd;
-            font-size: 1.2rem;
-            max-width: 600px;
+            padding: 12px 0;
+            min-height: 50px;
         }
 
-        /* Glassmorphism Player */
-        .player {
-            /* position: fixed;
-            bottom: 30px; */
-            width: 90%;
-            max-width: 500px;
-            background: var(--glass);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 20px;
-            padding: 20px;
-            margin-top: 48px;
+        .list {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            z-index: 100;
+            gap: 8px;
         }
 
-        .player-info {
-            display: flex;
-            justify-content: space-between;
+        .list-row {
+            display: grid;
+            grid-template-columns: 30px 1fr auto;
             align-items: center;
-            font-size: 14px;
-        }
-
-        .track-name {
-            font-weight: bold;
-            color: var(--neon-blue);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 85%;
-        }
-
-        .progress-container {
-            width: 100%;
-            height: 6px;
-            background: rgba(255,255,255,0.1);
+            gap: 10px;
+            padding: 10px;
             border-radius: 10px;
-            position: relative;
+            background: rgba(255, 255, 255, 0.04);
             cursor: pointer;
         }
 
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--primary);
+        .list-row:hover,
+        .list-row.active {
+            background: rgba(255, 71, 87, 0.13);
+        }
+
+        .num {
+            color: #777;
+            font-size: 11px;
+        }
+
+        .row-title {
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .row-artist {
+            font-size: 9px;
+            color: #777;
+            margin-top: 3px;
+        }
+
+        .row-time {
+            font-size: 9px;
+            color: #888;
+        }
+
+        .player {
+            position: fixed;
+            left: 50%;
+            bottom: 20px;
+            transform: translateX(-50%);
+            width: min(650px, 92%);
+            padding: 16px 18px;
+            background: rgba(20, 20, 20, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            box-shadow: 0 15px 50px #000;
+        }
+
+        .player-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 11px;
+        }
+
+        .track {
+            color: var(--blue);
+            font-weight: bold;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .time {
+            color: #aaa;
+        }
+
+        .progress {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.12);
             border-radius: 10px;
-            box-shadow: 0 0 10px var(--primary);
+            margin: 11px 0;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0;
+            height: 100%;
+            background: var(--red);
+            box-shadow: 0 0 10px var(--red);
         }
 
         .controls {
@@ -247,826 +399,572 @@
 
         .btn {
             background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
+            border: 0;
+            color: #fff;
+            font-size: 22px;
             cursor: pointer;
-            transition: 0.2s;
         }
 
         .btn:hover {
-            color: var(--primary);
-            transform: scale(1.2);
+            color: var(--red);
+            transform: scale(1.15);
         }
 
-        .btn-play {
-            font-size: 40px;
+        .play-btn {
+            font-size: 38px;
         }
 
-        /*
-         * YouTube iframe:
-         * Do not use display:none or a negative position.
-         * A real, tiny iframe works more reliably with the YouTube API.
-         */
         #yt-player {
             position: fixed;
-            left: 0;
-            bottom: 0;
             width: 1px;
             height: 1px;
+            left: 0;
+            bottom: 0;
             opacity: 0.01;
             pointer-events: none;
-            border: 0;
         }
 
-        /* Shown only if user opens this as file:// */
-        #youtube-warning {
+        .warning {
             display: none;
             position: fixed;
+            top: 75px;
             left: 50%;
-            bottom: 185px;
             transform: translateX(-50%);
             width: min(520px, 90%);
-            padding: 10px 14px;
-            background: rgba(0,0,0,0.88);
-            border: 1px solid rgba(255,71,87,0.55);
-            color: #ddd;
-            font-size: 11px;
-            line-height: 1.5;
+            background: #000e;
+            border: 1px solid var(--red);
+            border-radius: 10px;
+            padding: 10px;
             text-align: center;
-            z-index: 500;
-        }
-
-        #youtube-warning strong {
-            color: var(--primary);
-        }
-
-        /* Keyboard interaction visual */
-        .buzz-anim {
-            position: fixed;
-            pointer-events: none;
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary);
-            animation: float-up 1s ease-out forwards;
-            z-index: 1000;
-        }
-
-        @keyframes float-up {
-            from { transform: translateY(0); opacity: 1; }
-            to { transform: translateY(-100px); opacity: 0; }
-        }
-
-        .mobile-warning {
-            display: none;
             font-size: 10px;
-            margin-top: 10px;
-            color: #888;
+            z-index: 300;
+        }
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .feature {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 600px) {
-            .mobile-warning { display: block; }
-            .cassette-container { width: 280px; height: 180px; }
-            h1 { font-size: 3rem; }
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-            #youtube-warning {
-                bottom: 175px;
+            main {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            header {
+                padding-left: 15px;
+                padding-right: 15px;
             }
         }
     </style>
 </head>
 
 <body>
+    <!--
+    =========================================================
+    MANDA BOYZ - EASY EDITING GUIDE
 
-    <div class="bg-overlay"></div>
+    This is a normal standalone HTML file.
+
+    You can edit:
+    1. Website text      -> inside <body>
+    2. Colors/layout     -> inside <style>
+    3. Images            -> change the image URLs in <img>
+    4. YouTube playlist  -> change PLAYLIST_ID in <script>
+    5. Quotes            -> change the quotes array in <script>
+
+    No React, Vite or other framework is required.
+    =========================================================
+    -->
+
+    <div class="bg"></div>
     <div class="scanlines"></div>
 
-    <!-- <div class="status-bar">
-        Yahoo! Messenger: <span id="status-text">Online (Senti Mode...)</span>
-    </div> -->
-<!-- 
-    <div class="retro-label">
-        BURNED ON: 15 AUG 2004
-    </div> -->
+    <!-- ================= HEADER ================= -->
 
-    <div class="container" id="main-click-area">
-        <h1>MANDA BOYZ</h1>
+    <!-- <header>
+        <div class="status">
+            Yahoo! Messenger:
+            <span id="status">Online (Senti Mode...)</span>
+        </div>
 
-        <div class="cassette-container" id="cassette">
-            <div class="label">
-                <div class="reels">
-                    <div class="reel"></div>
-                    <div class="reel"></div>
+        <div class="badge">
+            BURNED ON: 15 AUG 2004
+        </div>
+    </header> -->
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main>
+
+        <!-- ================= HERO / TITLE ================= -->
+
+        <section class="hero">
+            <h1>MANDA BOYZ</h1>
+            <p class="subtitle">
+                90s & early-2000s songs • late night melodies
+            </p>
+        </section>
+
+        <!-- ================= TRENDING PLAYLIST ================= -->
+
+        <!-- <section class="section">
+            <div class="section-head">
+                <div class="section-title">🔥 TRENDING NOW</div>
+                <div class="section-label">THE SONGS WE NEVER SKIPPED</div>
+            </div>
+
+            <div class="cards">
+
+                <div class="card" data-index="0">
+                    <div class="cover">
+                        <img src="https://i.ytimg.com/vi/IgITZfS7L_8/hqdefault.jpg">
+                        <button class="play">▶</button>
+                    </div>
+                    <div class="song">Manda Boyz Mix</div>
+                    <div class="artist">2000s Memories</div>
+                </div>
+
+                <div class="card" data-index="1">
+                    <div class="cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1516280440614-37939bbdd4f1?auto=format&fit=crop&w=600&q=80">
+                        <button class="play">▶</button>
+                    </div>
+                    <div class="song">Senti Hours</div>
+                    <div class="artist">Late Night Playlist</div>
+                </div>
+
+                <div class="card" data-index="2">
+                    <div class="cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?auto=format&fit=crop&w=600&q=80">
+                        <button class="play">▶</button>
+                    </div>
+                    <div class="song">Dosti Classics</div>
+                    <div class="artist">Yaari • Memories</div>
+                </div>
+
+                <div class="card" data-index="3">
+                    <div class="cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80">
+                        <button class="play">▶</button>
+                    </div>
+                    <div class="song">Broken Hearts</div>
+                    <div class="artist">Awarapan Hours</div>
+                </div>
+
+                <div class="card" data-index="4">
+                    <div class="cover">
+                        <img
+                            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80">
+                        <button class="play">▶</button>
+                    </div>
+                    <div class="song">Road Trip 2004</div>
+                    <div class="artist">Full Volume</div>
+                </div>
+
+            </div>
+        </section> -->
+
+        <!-- ================= CASSETTE + PLAYLIST ================= -->
+
+        <section class="section feature">
+
+            <div class="panel cassette">
+                <!-- <div> -->
+                    <div class="cassette-box" id="cassette">
+                        <div class="cassette-label">
+
+                            <div class="reels">
+                                <div class="reel"></div>
+                                <div class="reel"></div>
+                            </div>
+
+                            <strong>MANDA BOYZ FAVOURITES</strong>
+                        </div>
+                    </div>
+                    <!-- <div class="quote" id="quote">
+                        "Yaaron dosti badi hi haseen hai..."
+                    </div> -->
+                <!-- </div> -->
+            </div>
+
+            <div class="panel">
+                <div class="section-head">
+                    <div class="section-title">💿 PARTY HOURS</div>
+                    <div class="section-label">PLAYLIST</div>
+                </div>
+
+                <div class="list">
+
+                    <div class="list-row active" data-index="0">
+                        <div class="num">01</div>
+                        <div>
+                            <div class="row-title">Manda Boyz Playlist</div>
+                            <div class="row-artist">YouTube Playlist</div>
+                        </div>
+                        <div class="row-time">▶</div>
+                    </div>
+
+                    <div class="list-row" data-index="1">
+                        <div class="num">02</div>
+                        <div>
+                            <div class="row-title">Next Memory</div>
+                            <div class="row-artist">Playlist Track</div>
+                        </div>
+                        <div class="row-time">→</div>
+                    </div>
+
+                    <div class="list-row" data-index="2">
+                        <div class="num">03</div>
+                        <div>
+                            <div class="row-title">Dosti Mode</div>
+                            <div class="row-artist">Playlist Track</div>
+                        </div>
+                        <div class="row-time">→</div>
+                    </div>
+
+                    <div class="list-row" data-index="3">
+                        <div class="num">04</div>
+                        <div>
+                            <div class="row-title">Awarapan Mode</div>
+                            <div class="row-artist">Playlist Track</div>
+                        </div>
+                        <div class="row-time">→</div>
+                    </div>
+
+                    <div class="list-row" data-index="4">
+                        <div class="num">05</div>
+                        <div>
+                            <div class="row-title">Road Trip Mode</div>
+                            <div class="row-artist">Playlist Track</div>
+                        </div>
+                        <div class="row-time">→</div>
+                    </div>
+
                 </div>
             </div>
+        </section>
+    </main>
+
+    <!-- ================= MUSIC PLAYER ================= -->
+
+    <div class="player">
+        <div class="player-top">
+            <div class="track" id="track-title">
+                Press Play to start memories...
+            </div>
+            <div class="time" id="time">00:00</div>
         </div>
 
-        <!-- <div class="quotes-container">
-            <p id="quote">"Yaaron dosti badi hi haseen hai..."</p>
-        </div> -->
-
-        <p class="mobile-warning">Tap anywhere to 'BUZZ' your friends</p>
-        <div class="player">
-        <div class="player-info">
-            <div class="track-name" id="track-title">Press Play to start memories...</div>
-            <div id="time">00:00</div>
-        </div>
-
-        <div class="progress-container" id="progress-container">
-            <div class="progress-bar" id="progress"></div>
+        <div class="progress" id="progress-container">
+            <div class="progress-fill" id="progress"></div>
         </div>
 
         <div class="controls">
-            <button class="btn" id="prev-btn" type="button">⏮</button>
-            <button class="btn btn-play" id="play-btn" type="button">▶</button>
-            <button class="btn" id="next-btn" type="button">⏭</button>
+            <button class="btn" id="prev">⏮</button>
+            <button class="btn play-btn" id="play">▶</button>
+            <button class="btn" id="next">⏭</button>
         </div>
     </div>
-    </div>
 
-    <!-- Glassmorphism Player -->
-    
-
-    <!-- YouTube API integration -->
     <div id="yt-player"></div>
 
-    <div id="youtube-warning">
-        <strong>YouTube cannot play directly from file://</strong><br>
-        Run this folder with <b>npx serve .</b> and open the localhost URL.
+    <div class="warning" id="warning">
+        YouTube playback needs a local web server.
+        <br>
+        Run <b>npx serve .</b> and open the localhost address.
     </div>
 
     <script>
-        /* =========================================================
-           QUOTES
-        ========================================================= */
+        const PLAYLIST_ID = "PLq-SlEHV0-RRP0tUOAduTfqTYKJwvF-0N";
+
+        let yt = null;
+        let ready = false;
+        let timer = null;
+
+        const play = document.getElementById("play");
+        const title = document.getElementById("track-title");
+        const progress = document.getElementById("progress");
+        const cassette = document.getElementById("cassette");
+        const time = document.getElementById("time");
+
+        /* ================= NOSTALGIC QUOTES ================= */
 
         const quotes = [
+            '"Yaaron dosti badi hi haseen hai..."',
             '"Pal, ye hai pyaar ke pal..."',
-            '"Awarapan, banjarapan... ek khala hai seene mein."',
-            '"Tu hi meri shab hai, subah hai..."',
-            '"Dil kyun yeh mera shor kare?"',
             '"Beete lamhe... woh baatein, woh yaadein."',
             '"Zindagi do pal ki... sirf do pal ki."',
-            '"Hero lag raha hai bhai tera!"',
-            '"Cyber Cafe @ 20/hr is where we lived."'
+            '"Cyber Cafe @ 20/hr is where we lived."',
+            '"Hero lag raha hai bhai tera!"'
         ];
 
-        let quoteIndex = 0;
+        let qi = 0;
 
         setInterval(() => {
-            quoteIndex = (quoteIndex + 1) % quotes.length;
+            qi = (qi + 1) % quotes.length;
 
-            const quoteEl = document.getElementById('quote');
-
-            quoteEl.style.opacity = 0;
+            const q = document.getElementById("quote");
+            q.style.opacity = 0;
 
             setTimeout(() => {
-                quoteEl.innerText = quotes[quoteIndex];
-                quoteEl.style.opacity = 1;
-            }, 500);
-
+                q.textContent = quotes[qi];
+                q.style.opacity = 1;
+            }, 300);
         }, 4000);
 
+        /* ================= YOUTUBE API ================= */
 
-        /* =========================================================
-           YOUTUBE CONFIG
-           ========================================================= */
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
 
-        /*
-         * This is the playlist from the YouTube URL you provided.
-         *
-         * Playlist:
-         * PLq-SlEHV0-RRP0tUOAduTfqTYKJwvF-0N
-         *
-         * First video:
-         * IgITZfS7L_8
-         */
-        const YOUTUBE_PLAYLIST_ID =
-            'PLq-SlEHV0-RRP0tUOAduTfqTYKJwvF-0N';
-
-        const FIRST_VIDEO_ID =
-            'IgITZfS7L_8';
-
-
-        /* =========================================================
-           YOUTUBE IFRAME API
-        ========================================================= */
-
-        let player = null;
-        let playerReady = false;
-        let progressInterval = null;
-
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-
-        const firstScriptTag =
-            document.getElementsByTagName('script')[0];
-
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-        /*
-         * YouTube calls this automatically after the API loads.
-         */
         function onYouTubeIframeAPIReady() {
-
-            console.log('YouTube API loaded');
-
-            /*
-             * IMPORTANT:
-             *
-             * listType and list MUST be inside playerVars.
-             * In the original code they were outside playerVars,
-             * so YouTube was not being initialized as a playlist.
-             */
-            const playerVars = {
+            const vars = {
                 autoplay: 0,
                 controls: 0,
-                disablekb: 1,
-                rel: 0,
                 playsinline: 1,
-                modestbranding: 1,
-
-                listType: 'playlist',
-                list: YOUTUBE_PLAYLIST_ID
+                rel: 0,
+                listType: "playlist",
+                list: PLAYLIST_ID
             };
 
-            /*
-             * Error 153 happens when YouTube doesn't receive a
-             * proper HTTP/HTTPS origin/referrer.
-             *
-             * When running with:
-             *     npx serve .
-             *
-             * this becomes http://localhost:3000 (or similar).
-             *
-             * Do NOT send origin:null for file:// pages.
-             */
-            if (
-                window.location.protocol === 'http:' ||
-                window.location.protocol === 'https:'
-            ) {
-                playerVars.origin = window.location.origin;
+            if (location.protocol === "http:" || location.protocol === "https:") {
+                vars.origin = location.origin;
             }
 
-            player = new YT.Player('yt-player', {
-                height: '1',
-                width: '1',
-
-                playerVars: playerVars,
-
+            yt = new YT.Player("yt-player", {
+                width: "1",
+                height: "1",
+                playerVars: vars,
                 events: {
-                    onReady: onPlayerReady,
-                    onStateChange: onPlayerStateChange,
-                    onError: onPlayerError
+                    onReady,
+                    onStateChange: onState,
+                    onError
                 }
             });
         }
 
+        function onReady() {
+            ready = true;
+            title.textContent = "Playlist Loaded. Click Play.";
 
-        /* =========================================================
-           PLAYER READY
-        ========================================================= */
-
-        function onPlayerReady(event) {
-
-            playerReady = true;
-
-            console.log('YouTube player ready');
-
-            trackTitle.innerText =
-                'Playlist Loaded. Click Play.';
-
-            /*
-             * Explicitly load the playlist after the player is ready.
-             * This makes playlist navigation reliable.
-             */
             try {
-                player.loadPlaylist({
-                    list: YOUTUBE_PLAYLIST_ID,
-                    listType: 'playlist',
+                yt.loadPlaylist({
+                    list: PLAYLIST_ID,
+                    listType: "playlist",
                     index: 0
                 });
-            } catch (error) {
-                console.error('Playlist load error:', error);
+            } catch (e) {
+                console.error(e);
             }
         }
 
+        function onState(e) {
+            if (!ready) return;
 
-        /* =========================================================
-           PLAYER STATE
-        ========================================================= */
-
-        function onPlayerStateChange(event) {
-
-            if (!playerReady) {
-                return;
-            }
-
-            switch (event.data) {
-
-                case YT.PlayerState.PLAYING:
-
-                    playBtn.innerText = '⏸';
-
-                    cassette.classList.add('playing');
-
-                    updateTrackTitle();
-
-                    startProgressTimer();
-
-                    break;
-
-
-                case YT.PlayerState.PAUSED:
-
-                    playBtn.innerText = '▶';
-
-                    cassette.classList.remove('playing');
-
-                    stopProgressTimer();
-
-                    break;
-
-
-                case YT.PlayerState.ENDED:
-
-                    playBtn.innerText = '▶';
-
-                    cassette.classList.remove('playing');
-
-                    stopProgressTimer();
-
-                    /*
-                     * Normally YouTube advances automatically through
-                     * a loaded playlist. Refresh the title afterward.
-                     */
-                    setTimeout(updateTrackTitle, 700);
-
-                    break;
-
-
-                case YT.PlayerState.BUFFERING:
-
-                    trackTitle.innerText = 'Loading memory...';
-
-                    break;
-
-
-                case YT.PlayerState.CUED:
-
-                    updateTrackTitle();
-
-                    break;
+            if (e.data === YT.PlayerState.PLAYING) {
+                play.textContent = "⏸";
+                cassette.classList.add("playing");
+                updateTitle();
+                startTimer();
+                document.getElementById("status").textContent = "Playing • Senti Mode";
+            } else if (e.data === YT.PlayerState.PAUSED) {
+                play.textContent = "▶";
+                cassette.classList.remove("playing");
+                stopTimer();
+                document.getElementById("status").textContent = "Online (Senti Mode...)";
+            } else if (e.data === YT.PlayerState.ENDED) {
+                play.textContent = "▶";
+                cassette.classList.remove("playing");
+                stopTimer();
+                setTimeout(updateTitle, 500);
+            } else if (e.data === YT.PlayerState.BUFFERING) {
+                title.textContent = "Loading memory...";
+            } else if (e.data === YT.PlayerState.CUED) {
+                updateTitle();
             }
         }
 
-
-        /* =========================================================
-           PLAYER ERROR
-        ========================================================= */
-
-        function onPlayerError(event) {
-
-            console.error('YouTube Player Error:', event.data);
-
-            /*
-             * 153 = missing HTTP Referer / client identification.
-             * This is normally caused by opening the page as file://.
-             */
-            if (event.data === 153) {
-
-                trackTitle.innerText =
-                    'Use localhost to play YouTube';
-
-                document.getElementById(
-                    'youtube-warning'
-                ).style.display = 'block';
-
-                return;
-            }
-
-            /*
-             * 101 / 150 = video owner does not allow embedding.
-             */
-            if (event.data === 101 || event.data === 150) {
-
-                trackTitle.innerText =
-                    'This video cannot be embedded';
-
-                return;
-            }
-
-            trackTitle.innerText =
-                'Unable to play this song';
+        function onStateChange(e) {
+            onState(e);
         }
 
+        function onError(e) {
+            console.error("YouTube error:", e.data);
 
-        /* =========================================================
-           DOM REFERENCES
-        ========================================================= */
-
-        const playBtn =
-            document.getElementById('play-btn');
-
-        const trackTitle =
-            document.getElementById('track-title');
-
-        const progressBar =
-            document.getElementById('progress');
-
-        const cassette =
-            document.getElementById('cassette');
-
-
-        /* =========================================================
-           PLAY / PAUSE
-        ========================================================= */
-
-        playBtn.addEventListener('click', () => {
-
-            if (!playerReady || !player) {
-
-                trackTitle.innerText =
-                    'Loading YouTube...';
-
-                return;
-            }
-
-            const state =
-                player.getPlayerState();
-
-            if (state === YT.PlayerState.PLAYING) {
-
-                player.pauseVideo();
-
+            if (e.data === 153) {
+                title.textContent = "Open through localhost to play";
+                document.getElementById("warning").style.display = "block";
+            } else if (e.data === 101 || e.data === 150) {
+                title.textContent = "This video cannot be embedded";
             } else {
-
-                player.playVideo();
+                title.textContent = "Unable to play this song";
             }
+        }
 
-            createBuzz(
-                window.innerWidth / 2,
-                window.innerHeight - 150,
-                'PLAY/PAUSE'
-            );
-        });
-
-
-        /* =========================================================
-           NEXT
-        ========================================================= */
-
-        document
-            .getElementById('next-btn')
-            .addEventListener('click', () => {
-
-                if (!playerReady || !player) {
-                    return;
-                }
-
-                player.nextVideo();
-
-                setTimeout(updateTrackTitle, 700);
-
-                createBuzz(
-                    window.innerWidth / 2,
-                    window.innerHeight - 150,
-                    'NEXT >>'
-                );
-            });
-
-
-        /* =========================================================
-           PREVIOUS
-        ========================================================= */
-
-        document
-            .getElementById('prev-btn')
-            .addEventListener('click', () => {
-
-                if (!playerReady || !player) {
-                    return;
-                }
-
-                player.previousVideo();
-
-                setTimeout(updateTrackTitle, 700);
-
-                createBuzz(
-                    window.innerWidth / 2,
-                    window.innerHeight - 150,
-                    '<< PREV'
-                );
-            });
-
-
-        /* =========================================================
-           TRACK TITLE
-        ========================================================= */
-
-        function updateTrackTitle() {
-
-            if (!playerReady || !player) {
-                return;
-            }
+        function updateTitle() {
+            if (!yt) return;
 
             try {
+                const d = yt.getVideoData();
 
-                const data =
-                    player.getVideoData();
-
-                if (data && data.title) {
-
-                    trackTitle.innerText =
-                        data.title;
+                if (d && d.title) {
+                    title.textContent = d.title;
                 }
-
-            } catch (error) {
-
-                console.warn(
-                    'Could not get track title:',
-                    error
-                );
+            } catch (e) {
+                // Ignore YouTube API errors while updating title.
             }
         }
 
+        function startTimer() {
+            stopTimer();
 
-        /* =========================================================
-           PROGRESS
-        ========================================================= */
+            timer = setInterval(() => {
+                if (!yt) return;
 
-        function startProgressTimer() {
+                const current = yt.getCurrentTime();
+                const duration = yt.getDuration();
 
-            stopProgressTimer();
+                if (!duration) return;
 
-            progressInterval =
-                setInterval(() => {
+                progress.style.width = (current / duration * 100) + "%";
 
-                    if (!playerReady || !player) {
-                        return;
-                    }
+                const minutes = Math.floor(current / 60);
+                const seconds = Math.floor(current % 60);
 
-                    const currentTime =
-                        player.getCurrentTime();
-
-                    const duration =
-                        player.getDuration();
-
-                    if (!duration || duration <= 0) {
-                        return;
-                    }
-
-                    const pct =
-                        (currentTime / duration) * 100;
-
-                    progressBar.style.width =
-                        Math.min(100, pct) + '%';
-
-                    const mins =
-                        Math.floor(currentTime / 60);
-
-                    const secs =
-                        Math.floor(currentTime % 60);
-
-                    document.getElementById('time')
-                        .innerText =
-                        `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-
-                }, 500);
+                time.textContent =
+                    minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+            }, 500);
         }
 
-
-        function stopProgressTimer() {
-
-            if (progressInterval) {
-
-                clearInterval(progressInterval);
-
-                progressInterval = null;
+        function stopTimer() {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
             }
         }
 
+        /* ================= PLAYER CONTROLS ================= */
 
-        /* =========================================================
-           PROGRESS SEEK
-        ========================================================= */
+        play.onclick = () => {
+            if (!ready) return;
 
-        document
-            .getElementById('progress-container')
-            .addEventListener('click', (event) => {
+            if (yt.getPlayerState() === YT.PlayerState.PLAYING) {
+                yt.pauseVideo();
+            } else {
+                yt.playVideo();
+            }
+        };
 
-                if (!playerReady || !player) {
-                    return;
-                }
+        document.getElementById("next").onclick = () => {
+            if (ready) {
+                yt.nextVideo();
+                setTimeout(updateTitle, 600);
+            }
+        };
 
-                const rect =
-                    event.currentTarget.getBoundingClientRect();
+        document.getElementById("prev").onclick = () => {
+            if (ready) {
+                yt.previousVideo();
+                setTimeout(updateTitle, 600);
+            }
+        };
 
-                const percentage =
-                    (event.clientX - rect.left) /
-                    rect.width;
+        document.getElementById("progress-container").onclick = e => {
+            if (!ready) return;
 
-                const duration =
-                    player.getDuration();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const percentage = (e.clientX - rect.left) / rect.width;
+            const duration = yt.getDuration();
 
-                if (!duration || duration <= 0) {
-                    return;
-                }
-
-                const safePercentage =
-                    Math.max(0, Math.min(1, percentage));
-
-                player.seekTo(
-                    duration * safePercentage,
+            if (duration) {
+                yt.seekTo(
+                    duration * Math.max(0, Math.min(1, percentage)),
                     true
                 );
-            });
+            }
+        };
 
+        /* ================= PLAYLIST CARD CONTROLS ================= */
 
-        /* =========================================================
-           BUZZ INTERACTION
-        ========================================================= */
+        function selectItem(index) {
+            if (!ready) return;
 
-        function createBuzz(
-            x,
-            y,
-            text = 'BUZZ!'
-        ) {
-
-            const buzz =
-                document.createElement('div');
-
-            buzz.className = 'buzz-anim';
-
-            buzz.style.left =
-                x + 'px';
-
-            buzz.style.top =
-                y + 'px';
-
-            buzz.innerText =
-                text;
-
-            document.body.appendChild(buzz);
-
-            /*
-             * Short retro beep.
-             *
-             * Reuse the browser's audio context when possible,
-             * instead of creating one for every click.
-             */
             try {
+                yt.playVideoAt(index);
+            } catch (e) {
+                yt.loadPlaylist({
+                    list: PLAYLIST_ID,
+                    listType: "playlist",
+                    index: index
+                });
 
-                const AudioContext =
-                    window.AudioContext ||
-                    window.webkitAudioContext;
-
-                if (AudioContext) {
-
-                    const actx =
-                        new AudioContext();
-
-                    const osc =
-                        actx.createOscillator();
-
-                    const gain =
-                        actx.createGain();
-
-                    osc.type = 'sine';
-
-                    osc.frequency.setValueAtTime(
-                        800,
-                        actx.currentTime
-                    );
-
-                    gain.gain.setValueAtTime(
-                        0.08,
-                        actx.currentTime
-                    );
-
-                    gain.gain.exponentialRampToValueAtTime(
-                        0.00001,
-                        actx.currentTime + 0.1
-                    );
-
-                    osc.connect(gain);
-
-                    gain.connect(
-                        actx.destination
-                    );
-
-                    osc.start();
-
-                    osc.stop(
-                        actx.currentTime + 0.1
-                    );
-                }
-
-            } catch (error) {
-                console.log(
-                    'Buzz audio unavailable.'
-                );
+                setTimeout(() => yt.playVideo(), 500);
             }
 
-            setTimeout(() => {
-                buzz.remove();
-            }, 1000);
+            document.querySelectorAll(".list-row").forEach(row => {
+                row.classList.toggle(
+                    "active",
+                    Number(row.dataset.index) === index
+                );
+            });
         }
 
+        document.querySelectorAll(".card").forEach(card => {
+            card.onclick = () => {
+                selectItem(Number(card.dataset.index));
+            };
 
-        /* =========================================================
-           PAGE CLICK
-        ========================================================= */
-
-        window.addEventListener('click', (e) => {
-
-            /*
-             * Don't create a normal BUZZ when clicking
-             * the music player buttons or progress bar.
-             */
-            if (
-                e.target.closest('button') ||
-                e.target.closest('.progress-container')
-            ) {
-                return;
-            }
-
-            createBuzz(
-                e.clientX,
-                e.clientY
-            );
+            card.querySelector(".play").onclick = e => {
+                e.stopPropagation();
+                selectItem(Number(card.dataset.index));
+            };
         });
 
-
-        /* =========================================================
-           KEYBOARD
-        ========================================================= */
-
-        window.addEventListener('keydown', (e) => {
-
-            if (e.code !== 'Space') {
-                return;
-            }
-
-            e.preventDefault();
-
-            if (!playerReady || !player) {
-                return;
-            }
-
-            const state =
-                player.getPlayerState();
-
-            if (
-                state === YT.PlayerState.PLAYING
-            ) {
-
-                player.pauseVideo();
-
-            } else {
-
-                player.playVideo();
-            }
-
-            createBuzz(
-                window.innerWidth / 2,
-                window.innerHeight / 2,
-                'SENTI OVERLOAD!'
-            );
+        document.querySelectorAll(".list-row").forEach(row => {
+            row.onclick = () => {
+                selectItem(Number(row.dataset.index));
+            };
         });
 
+        /* ================= KEYBOARD CONTROLS ================= */
 
-        /* =========================================================
-           FILE:// WARNING
-        ========================================================= */
+        document.addEventListener("keydown", e => {
+            if (e.code === "Space") {
+                e.preventDefault();
+                play.click();
+            }
 
-        /*
-         * This is the one limitation that cannot be fixed purely
-         * inside the HTML:
-         *
-         * YouTube Error 153 can occur when a page is opened directly
-         * as file:// because there is no normal HTTP Referer.
-         *
-         * Use:
-         *
-         *     npx serve .
-         *
-         * and open the localhost URL.
-         */
-        if (window.location.protocol === 'file:') {
+            if (e.code === "ArrowRight") {
+                document.getElementById("next").click();
+            }
 
-            document.getElementById(
-                'youtube-warning'
-            ).style.display = 'block';
+            if (e.code === "ArrowLeft") {
+                document.getElementById("prev").click();
+            }
+        });
 
-            document.getElementById(
-                'status-text'
-            ).innerText =
-                'Local file — use localhost for music';
+        /* ================= LOCAL FILE WARNING ================= */
 
+        if (location.protocol === "file:") {
+            document.getElementById("warning").style.display = "block";
+            document.getElementById("status").textContent =
+                "Local file — use localhost";
         }
     </script>
-
 </body>
+
 </html>
